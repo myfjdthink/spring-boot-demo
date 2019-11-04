@@ -4,15 +4,13 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
-@SpringBootTest
-class AccountRepositoryTests {
+@DataJpaTest
+class AccountRepositoryTests @Autowired constructor(
+        val accountRepository: AccountRepository) {
 
     private val logger = LoggerFactory.getLogger(AccountRepositoryTests::class.java)
-
-    @Autowired
-    lateinit var accountRepository: AccountRepository
 
     @Test
     fun `jpa test "`() {
@@ -28,6 +26,6 @@ class AccountRepositoryTests {
         var account1 = accountRepository.findOneByUserId(12)
 
         logger.info("find : $account1")
-        Assertions.assertThat(account1.balance).isEqualTo(30.0)
+        Assertions.assertThat(account1!!.balance).isEqualTo(30.0)
     }
 }

@@ -14,11 +14,11 @@ internal class HelloControllerTest {
     private val port: Int = 0
 
     @Autowired
-    private val restTemplate: TestRestTemplate? = null
+    private lateinit var restTemplate: TestRestTemplate
 
     @Test
     fun `hello get name `() {
-        assertThat(this.restTemplate?.getForObject("http://localhost:$port/hello/nick",
+        assertThat(this.restTemplate.getForObject("http://localhost:$port/hello/nick",
                 String::class.java)).contains("Hello nick")
     }
 }

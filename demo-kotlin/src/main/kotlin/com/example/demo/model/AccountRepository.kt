@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface AccountRepository : CrudRepository<Account, Long> {
 
-    fun findOneByUserId(userId: Long?): Account
+    fun findOneByUserId(userId: Long?): Account?
 }
